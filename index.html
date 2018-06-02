@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Word Guess Game</title>
+</head>
+
+<body>
+
+  <div id="game">
+    <h3>The Psychic Game</h3>
+    <p>Rules:</p>
+        <ol>
+            <li>You have 9 chances to guess the same letter as the computer.</li>
+            <li>If you run out of guesses you lose</li>
+        </ol>
+    <p>Press any key to start!</p>
+  </div>
+
+  <script type="text/javascript">
+    // Array of computerChoices
+    var computerChoices = ["a", "b", "c" , "d" , "e" , "f" , "g" , "h" , "i" , "j" , "k" , "l" , "m" , "n" , "o" , "p" , "q" , "r" , "s" , "t" , "u" , "v" , "w" , "x" , "y" , "z"];
+    var wins = 0;
+    var losses = 0;
+    var guessesLeft = 9;
+    var guesses = [];
+    // This function is run whenever the user presses a key.
+    document.onkeyup = function(event) {
+      // Determines which key was pressed.
+      var userGuess = event.key;
+      // Computer's guess.
+      var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+      
+      if ((userGuess === computerGuess) && (guessesLeft >= 0)){
+          win++;
+          alert("You Won!");
+      } else if ((userGuess != computerGuess) && (guessesLeft > 0)){
+          guessesLeft--;
+      } else if ((userGuess != computerGuess) && (guessesLeft === 0)) {
+          losses = 1;
+          alert("You have run out of guesses. You lose.");
+      }
+      
+      
+      guesses.push(userGuess);
+        var html =
+          "<h1>The Psychic Game</h1>" +
+          "<p>Guess what letter I'm thinking of!</p>" +
+          "<p>Wins: " + wins + "</p>" +
+          "<p>Losses: " + losses + "</p>" +
+          "<p>Guesses Left: " + guessesLeft + "</p>" +
+          "<p>Your Guesses So Far: " + guesses + "</p>";
+        // Set the inner HTML contents of the #game div to our html string
+        document.querySelector("#game").innerHTML = html;
+      };
+  </script>
+
+</body>
+
+</html>
